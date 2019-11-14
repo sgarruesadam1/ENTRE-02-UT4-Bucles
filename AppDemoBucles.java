@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /**
- *  @author - Serrgiio Garrués Aizcorbe
+ *  @author - Sergio Garrués Aizcorbe
  *  
  * Incluye todo el código dentro del main()
  * No declares ningún nuevo método en esta clase ni atributos
