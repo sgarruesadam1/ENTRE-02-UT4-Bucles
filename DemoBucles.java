@@ -1,17 +1,20 @@
+import java.util.Random;
 /**
- *    @author - 
+ *    @author - Sergio Garrués Aizcorbe
  */
 public class DemoBucles
 {
     private final char ASTERISCO = '*';
     private final char ESPACIO = ' ';
 
+    private Random generador;
+
     /**
      * Constructor  
      */
     public DemoBucles()
     {
-       
+        generador = new Random();
     }
 
     /**
@@ -26,8 +29,12 @@ public class DemoBucles
      *  Usa bucles while
      */
     public int mayorPotencia2(int numero) {
-        
-        return 0;
+        int potencia = 1;
+        while (potencia <= numero / 2)   
+        {
+            potencia *= 2;
+        }
+        return potencia;
 
     }
 
@@ -47,15 +54,28 @@ public class DemoBucles
      *  64 =    64
      */
     public void escribirSumaPotencias(int numero) {
+        int potencia = mayorPotencia2(numero);
+        int total = potencia;
 
-         
+        System.out.printf("\n%6d= %6d", numero, potencia);
+        while (potencia > 1)    {
+            potencia = potencia / 2;
+            total += potencia;
+            if (total <= numero)   {
+                System.out.printf("%6d", potencia);
+            }
+            else {
+                total -= potencia;
+            }
+
+        }
 
     }
 
     /**
      * Generar aleatorios entre 0 y 255
      * y escribir cada aleatorio como suma de potencias de 2
-     * Parar al salir el 0 o despues de generar n aleatorios
+     * Parar al salir el 255 o despues de generar n aleatorios
      * (ver enunciado)
      * 
      * Hay que usar el método anterior
@@ -64,9 +84,24 @@ public class DemoBucles
      * 
      */
     public void generarAleatorios(int n) {
+        int aleatorio = 1;
+        int veces = 1;
 
-       
-
+        System.out.println("Nºs aleatorios como suma de potencias de 2");
+        while (aleatorio > 0 && veces <= n) 
+        {
+            aleatorio = generador.nextInt(256);
+            escribirSumaPotencias(aleatorio);
+            veces++;
+        }
+        if (aleatorio == 0)
+        {
+            System.out.println("Bucle terminado porque se ha generado un 0");
+        }
+        else    
+        {
+            System.out.println("\nBucle terminado porque se han generado ya " + n + " aleatorios");
+        }
     }
 
     /**
@@ -76,7 +111,14 @@ public class DemoBucles
      */
     public void escribirCaracter(int n, char caracter)
     {
-         
+        char strCaracter = caracter;
+
+        for (int contador = 1; contador <= n; contador++)
+        {
+
+            System.out.print(caracter);
+        }
+
     }
 
     /**
@@ -86,10 +128,18 @@ public class DemoBucles
      *   Usa bucles for
      */
     public  void mostrarEscalera(int escalones, int alto, int ancho) {
-        System.out.println();
+        int blancos = 0;
+        for (int contadorEs = 1; contadorEs <= escalones; contadorEs++)
+        {
+            for (int numBlancos = 1; numBlancos <= alto; numBlancos++)
+            {
+                escribirCaracter(blancos, ' ');
+                escribirCaracter(ancho, '*');
+                System.out.println("");
+            }
 
-         
+            blancos += ancho;
+        }
 
     }
-
-}
+} 
